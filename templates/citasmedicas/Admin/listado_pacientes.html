@@ -1,0 +1,104 @@
+{% extends 'citasmedicas/Admin/base_citas.html' %}
+{% load static %}
+
+{% block estilos %}
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet"
+          href="{% static 'citasmedicas/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+
+    <h1>Listado Pacientes</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Pacientes</a></li>
+        <li class="active">Listado Pacientes</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content container-fluid">
+
+    <div class="box box-primary">
+        <!-- <div class="box-header with-border">
+            <h3 class="box-title">Data Table</h3>
+        </div> -->
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Ap. Paterno</th>
+                    <th>Ap. Materno</th>
+                    <th>Telefono</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in lista %}
+                    <tr>
+                        <td>{{ u.paciente_dni }}</td>
+                        <td>{{ u.paciente_nombres }}</td>
+                        <td>{{ u.paciente_appaterno }}</td>
+                        <td>{{ u.paciente_apmaterno }}</td>
+                        <td>{{ u.paciente_telefono }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div id="messages">
+        <div class="alert alert-{{message.tags}} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i>
+                {{ message|safe }}
+            </h4>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</section>
+
+
+
+{% endblock %}
+
+{% block librerias %}
+    <!-- DataTables -->
+    <script src="{% static 'citasmedicas/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'citasmedicas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "0 registros encontrados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron registros en la base de datos",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Previo"
+                    },
+                }
+            })
+        });
+    </script>
+{% endblock %}

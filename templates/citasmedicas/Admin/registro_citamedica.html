@@ -1,0 +1,83 @@
+{% extends 'citasmedicas/Admin/base_citas.html' %}
+{% load static %}
+{% block content %}
+    <section class="content-header">
+
+        <h1>Registrar Cita Medica</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Cita Medica</a></li>
+            <li class="active">Registrar cita medica</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ingresa los datos solicitados</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 form-group">
+                            <label>Fecha cita</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input name="cita_fecha" type="text" class="form-control pull-right" id="cita_fecha" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 form-group">
+                            <label for="cita_hora">Hora cita</label>
+                            <input name="cita_hora" type="time" class="form-control" id="cita_hora" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paciente_ak">Paciente</label>
+                        <select id="paciente_ak" name="paciente_ak" class="form-control" required>
+                            {% for u in lista_pacientes %}
+                                <option value="{{u.paciente_ak}}">{{u.get_fullname}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medico_ak">Medico</label>
+                        <select id="medico_ak" name="medico_ak" class="form-control" required>
+                            {% for u in lista_medicos %}
+                                <option value="{{u.medico_ak}}">{{u.get_description}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                {{ session.user.username }}
+                <div class="box-footer">
+                    <button type="submit" id="boton_agregar" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block librerias %}
+    <!-- bootstrap datepicker -->
+    <script src="{% static 'citasmedicas/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript">
+        //Date picker
+        $('#cita_fecha').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            language: "es",
+            todayBtn: "linked"
+        });
+    </script>
+{% endblock %}

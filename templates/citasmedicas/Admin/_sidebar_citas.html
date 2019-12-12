@@ -1,0 +1,24 @@
+<li class="header">SECCIONES</li>
+	<!-- Optionally, you can add icons to the links -->
+	<li class="{% if 'ver-citasmedicas' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:ver.citasmedicas' %}"><i class="fa fa-h-square"></i><span>Ver Citas Medicas</span></a>
+	</li>
+	<li class="{% if 'registro-citamedica' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:registro.citamedica' %}"><i class="fa fa-medkit"></i><span>Registrar Cita Médica</span></a>
+	</li>
+	<li class="{% if 'registro-resolucion' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:registro.paciente' %}"><i class="fa fa-user-plus "></i><span>Registrar Paciente</span></a>
+	</li>
+	<li class="{% if 'registro-medico' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:registro.medico' %}"><i class="fa fa-user-md"></i><span>Registrar Medico</span></a>
+	</li>
+	<li class="{% if 'ver-resoluciones' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:ver.pacientes' %}"><i class="fa fa-list-alt"></i><span>Ver Pacientes</span></a></li>
+	</li>
+	<li class="{% if 'ver-medicos' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:ver.medicos' %}"><i class="fa fa-list-alt"></i><span>Ver Medicos</span></a>
+	</li>
+	<li class="{% if 'ver-especialidades' in request.path %} {{'active'}} {% endif %}">
+		<a href="{% url 'citasmedicas:ver.especialidades' %}"><i class="fa fa-list-alt"></i><span>Ver Especialidades</span></a>
+	</li>
+</li>
